@@ -27,6 +27,55 @@ const agregarYquitarModal = (modal, animacion1, animacion2, terminaEn, opa) => {
     menuStiky.style.opacity = `${opa}`
 }
 
+// validacion del modulo
+fuego.forEach(fueguito => {
+    fueguito.addEventListener(`click`, e => {
+        e.preventDefault()
+        modal.style.visibility = `visible`
+        agregarYquitarModal(modal, `opacitiModal`, `modal`, `forwards`, `0`)
+
+        imfFuego.forEach(img => {
+            if (e.target === img) {
+                document.querySelector(`.contentImgModalMenu img`).src = e.target.parentElement.parentElement.previousElementSibling.src
+            }
+        })
+        fuego.forEach(img => {
+            if (e.target === img) {
+                document.querySelector(`.contentImgModalMenu img`).src = e.target.parentElement.previousElementSibling.src
+            }
+        })
+    })
+})
+document.querySelector(`.modalMenu`).addEventListener(`click`, e => {
+    e.preventDefault()
+    const cerrar = document.querySelectorAll(`.closedx2`)
+    cerrar.forEach(cerrado => {
+        switch (e.target) {
+            case cerrado:
+                agregarYquitarModal(modal, `opacitiModalClosed`, `modalClosed`, ``, `1`)
+                setTimeout(() => {
+                    modal.style.visibility = `hidden`
+                }, 1000)
+                break;
+            case comprar:
+                document.querySelector(`.hasComprado`).classList.add(`scaleGracias`)
+
+
+                setTimeout(() => {
+                    document.querySelector(`.hasComprado`).classList.add(`scaleGraciasDevolver`)
+                    setTimeout(() => {
+                        document.querySelector(`.hasComprado`).classList.remove(`scaleGraciasDevolver`)
+                        document.querySelector(`.hasComprado`).classList.remove(`scaleGracias`)
+
+                    }, 700)
+                }, 4000)
+                break;
+
+        }
+    })
+
+})
+
 // ==============================================================================
 // cambiando el menu styki
 // ==============================================================================
@@ -48,6 +97,25 @@ window.addEventListener(`scroll`, () => {
 // ==============================================================================
 //              media querys 
 // ==============================================================================
+window.addEventListener(`load`, e => {
+    document.querySelector(`.animacionDes`).classList.add(`animacionDesACTIVO`)
+    document.querySelector(`.imgPrincipal`).classList.add(`imgPrincipalANIMATION`)
+    document.querySelector(`.h `).classList.add(`animacionLetrasANIMATE`)
+    document.querySelector(`.o-1 `).classList.add(`animacionLetrasANIMATE`)
+    document.querySelector(`.o-2 `).classList.add(`animacionLetrasANIMATE`)
+    document.querySelector(`.o-3 `).classList.add(`animacionLetrasANIMATE`)
+    document.querySelector(`.t `).classList.add(`animacionLetrasANIMATE`)
+    document.querySelector(`.f `).classList.add(`animacionLetrasANIMATE`)
+    document.querySelector(`.d `).classList.add(`animacionLetrasANIMATE`)
+    
+    
+    document.body.classList.remove(`hiddenPreloader`)
+    document.querySelector(`.contentPreloader `).style.display = `none`
+    
+})
+// ==============================================================================
+//              media querys 
+// ==============================================================================
 const ipad = matchMedia(`screen and (max-width: 768px)`)
 
 
@@ -65,20 +133,13 @@ const validadion = (ipad) => {
         window.addEventListener(`scroll`, (e) => {
             if (scrollY + 350 > alturaAnimate) {
                 titleMenu.style.animationName = `desaserMenu`
-                bcgtitleMenu.style.backgroundColor = `rgba(0,0,0,0)`
+                bcgtitleMenu.classList.add(`bgc0`)
+                setTimeout(() => {
+
+                    bcgtitleMenu.style.visibility = `hidden`
+                },1000)
             }
         })
-
-
-
-        // validacion del modulo
-        fuego.forEach(fueguito => {
-            fueguito.removeEventListener(`click`, e => { })
-        })
-        document.getElementById(`closed`).removeEventListener(`click`, () => { })
-        // validacion del modulo
-
-
 
         // validacion de hover 
         contentimgs.forEach(contentimg => {
@@ -90,7 +151,7 @@ const validadion = (ipad) => {
 
 
         // validacion de menu de comida 
-        document.querySelector(`.contenedorDiarioComida`).removeEventListener(`click`, e => { })
+        document.querySelector(`.contenedorDiarioComida`).removeEventListener(`click`, () => { })
         // validacion de menu de comida 
 
     } else {
@@ -101,102 +162,47 @@ const validadion = (ipad) => {
             menuTrasladacion.classList.remove(`activo`)
         })
 
-        window.removeEventListener(`scroll`, (e) => {
-            if (scrollY + 300 > alturaAnimate) {
-                titleMenu.style.animationName = `desaserMenu`
-                bcgtitleMenu.style.backgroundColor = `rgba(0,0,0,0)`
+        window.removeEventListener(`scroll`, () => {})
+
+
+
+
+
+
+        // validacion de hover 
+        contentimgs.forEach(contentimg => {
+            contentimg.addEventListener(`mouseover`, (e) => {
+                imgs.forEach(img => {
+                    img.style.filter = `brightness(.4)`
+                    contentimg.firstElementChild.style.filter = `brightness(1)`
+                })
+            })
+            contentimg.addEventListener(`mouseout`, (e) => {
+                imgs.forEach(img => {
+                    img.style.filter = `brightness(1)`
+                })
+            })
+        })
+        // validacion de hover 
+
+
+
+        // validacion de menu de comida 
+        document.querySelector(`.contenedorDiarioComida`).addEventListener(`click`, e => {
+            switch (e.target) {
+                case verMas:
+                    MostrarRegrezar(`primeraVistaMenuComida__img`, `contentTituloMenu`, `botonVerMenu`, `segundaVistaMenuComida`, `segundaVistaMenuComida`, `transladarDerecha`, `transladarIzquierda`, `transladarMedio`, `aparecerMenu`)
+                    break;
+                case ocultarMenu:
+                    MostrarRegrezar(`primeraVistaMenuComida__img`, `contentTituloMenu`, `botonVerMenu`, `segundaVistaMenuComida`, `primeraVistaMenuComida`, `posicionOriginalDerecha`, `posicionOriginalIzquierda`, `transladarMedioAparecer`, `desaparecerMenu`)
+                    break;
+                // case ocultarMenu:
+                //     MostrarRegrezar(`primeraVistaMenuComida__img`, `contentTituloMenu`, `botonVerMenu`, `segundaVistaMenuComida`, `primeraVistaMenuComida`, `posicionOriginalDerecha`, `posicionOriginalIzquierda`, `transladarMedioAparecer`, `desaparecerMenu`)
+                //     break;
             }
-        })
-
-
-
-
-        // validacion del modulo
-        fuego.forEach(fueguito => {
-            fueguito.addEventListener(`click`, e => {
-                e.preventDefault()
-                modal.style.visibility = `visible`
-                agregarYquitarModal(modal, `opacitiModal`, `modal`, `forwards`, `0`)
-            })
-        })
-        document.querySelector(`.modalMenu`).addEventListener(`click`, e => {
-            e.preventDefault()
-            const cerrar = document.querySelectorAll(`.closedx2`)
-            cerrar.forEach(cerrado => {
-                switch (e.target) {
-                    case cerrado:
-                        agregarYquitarModal(modal, `opacitiModalClosed`, `modalClosed`, ``, `1`)
-                        setTimeout(() => {
-                            modal.style.visibility = `hidden`
-                        }, 1000)
-                        break;
-                    case comprar:
-                        document.querySelector(`.hasComprado`).classList.add(`scaleGracias`)
-
-
-                        setTimeout(() => {
-                            document.querySelector(`.hasComprado`).classList.add(`scaleGraciasDevolver`)
-                            setTimeout(() => {
-                                document.querySelector(`.hasComprado`).classList.remove(`scaleGraciasDevolver`)
-                                document.querySelector(`.hasComprado`).classList.remove(`scaleGracias`)
-
-                            }, 700)
-                        }, 4000)
-                        break;
-
-                }
-            })
 
         })
     }
-    // validacion del modulo
-
-
-    // validacion de hover 
-    contentimgs.forEach(contentimg => {
-        contentimg.addEventListener(`mouseover`, (e) => {
-            imgs.forEach(img => {
-                img.style.filter = `brightness(.4)`
-                contentimg.firstElementChild.style.filter = `brightness(1)`
-            })
-        })
-        contentimg.addEventListener(`mouseout`, (e) => {
-            imgs.forEach(img => {
-                img.style.filter = `brightness(1)`
-            })
-        })
-    })
-    // validacion de hover 
-
-
-
-    // validacion de menu de comida 
-    document.querySelector(`.contenedorDiarioComida`).addEventListener(`click`, e => {
-        switch (e.target) {
-            case verMas:
-                MostrarRegrezar(`primeraVistaMenuComida__img`, `contentTituloMenu`, `botonVerMenu`, `segundaVistaMenuComida`, `segundaVistaMenuComida`, `transladarDerecha`, `transladarIzquierda`, `transladarMedio`, `aparecerMenu`)
-                break;
-            case ocultarMenu:
-                MostrarRegrezar(`primeraVistaMenuComida__img`, `contentTituloMenu`, `botonVerMenu`, `segundaVistaMenuComida`, `primeraVistaMenuComida`, `posicionOriginalDerecha`, `posicionOriginalIzquierda`, `transladarMedioAparecer`, `desaparecerMenu`)
-                break;
-            case ocultarMenu:
-                MostrarRegrezar(`primeraVistaMenuComida__img`, `contentTituloMenu`, `botonVerMenu`, `segundaVistaMenuComida`, `primeraVistaMenuComida`, `posicionOriginalDerecha`, `posicionOriginalIzquierda`, `transladarMedioAparecer`, `desaparecerMenu`)
-                break;
-            default:
-                imfFuego.forEach(img => {
-                    if (e.target === img) {
-                        document.querySelector(`.contentImgModalMenu img`).src = e.target.parentElement.parentElement.previousElementSibling.src
-                    }
-                })
-                fuego.forEach(img => {
-                    if (e.target === img) {
-                        document.querySelector(`.contentImgModalMenu img`).src = e.target.parentElement.previousElementSibling.src
-                    }
-                })
-                break
-        }
-
-    })
     // validacion de menu de comida 
 }
 
