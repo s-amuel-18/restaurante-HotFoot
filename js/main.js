@@ -36,7 +36,7 @@ const bcgtitleMenu = document.querySelector(`.contentMenuDesaparecerMedia`)
 const menuStiky = document.querySelector(`.header__contentMenuAndLogo`)
 const animate = document.querySelector(`.contenedorDiarioComida`)
 let alturaAnimate = animate.offsetTop;
-window.addEventListener(`scroll`, (e) => {
+window.addEventListener(`scroll`, () => {
     if (scrollY + 100 > alturaAnimate) {
         menuStiky.style.animationName = `aparecerMenuStiky`
     } else {
@@ -55,7 +55,7 @@ const ipad = matchMedia(`screen and (max-width: 768px)`)
 const validadion = (ipad) => {
     if (ipad.matches) {
 
-        Layer_1.addEventListener(`click`, e => {
+        Layer_1.addEventListener(`click`, () => {
             menuTrasladacion.classList.add(`activo`)
         })
         closedx.addEventListener(`click`, e => {
@@ -82,7 +82,7 @@ const validadion = (ipad) => {
 
         // validacion de hover 
         contentimgs.forEach(contentimg => {
-            contentimg.removeEventListener(`mouseover`, () => {})
+            contentimg.removeEventListener(`mouseover`, () => { })
             contentimg.removeEventListener(`mouseout`, () => { })
         })
         // validacion de hover 
@@ -119,31 +119,33 @@ const validadion = (ipad) => {
                 agregarYquitarModal(modal, `opacitiModal`, `modal`, `forwards`, `0`)
             })
         })
-        document.querySelector(`.contentDescriptionModalMenu`).addEventListener(`click`, e => {
-            switch (e.target) {
-                case document.getElementById(`closed`):
-                    agregarYquitarModal(modal, `opacitiModalClosed`, `modalClosed`, ``, `1`)
-                    setTimeout(() => {
-                        modal.style.visibility = `hidden`
-                    }, 1000)
-                    break;
-                case comprar:
-                    document.querySelector(`.hasComprado`).classList.add(`scaleGracias`)
-                    
-                    
-                    setTimeout(() => {
-                        document.querySelector(`.hasComprado`).classList.add(`scaleGraciasDevolver`)
+        document.querySelector(`.modalMenu`).addEventListener(`click`, e => {
+            e.preventDefault()
+            const cerrar = document.querySelectorAll(`.closedx2`)
+            cerrar.forEach(cerrado => {
+                switch (e.target) {
+                    case cerrado:
+                        agregarYquitarModal(modal, `opacitiModalClosed`, `modalClosed`, ``, `1`)
                         setTimeout(() => {
-                            document.querySelector(`.hasComprado`).classList.remove(`scaleGraciasDevolver`)
-                            document.querySelector(`.hasComprado`).classList.remove(`scaleGracias`)
+                            modal.style.visibility = `hidden`
+                        }, 1000)
+                        break;
+                    case comprar:
+                        document.querySelector(`.hasComprado`).classList.add(`scaleGracias`)
 
-                        }, 700)
-                    }, 4000)
-                    break;
-            
-                default:
-                    break;
-            }
+
+                        setTimeout(() => {
+                            document.querySelector(`.hasComprado`).classList.add(`scaleGraciasDevolver`)
+                            setTimeout(() => {
+                                document.querySelector(`.hasComprado`).classList.remove(`scaleGraciasDevolver`)
+                                document.querySelector(`.hasComprado`).classList.remove(`scaleGracias`)
+
+                            }, 700)
+                        }, 4000)
+                        break;
+
+                }
+            })
 
         })
     }
