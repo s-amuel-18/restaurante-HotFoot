@@ -84,7 +84,10 @@ const titleMenu = document.querySelector(`.contentMenuDesaparecerMedia h2`)
 const bcgtitleMenu = document.querySelector(`.contentMenuDesaparecerMedia`)
 const menuStiky = document.querySelector(`.header__contentMenuAndLogo`)
 const animate = document.querySelector(`.contenedorDiarioComida`)
-let alturaAnimate = animate.offsetTop;
+let alturaAnimate = animate.getBoundingClientRect().top 
+// let alturaAnimate = animate.offsetTop; image.getBoundingClientRect().top 
+
+
 window.addEventListener(`scroll`, () => {
     if (scrollY + 100 > alturaAnimate) {
         menuStiky.style.animationName = `aparecerMenuStiky`
@@ -110,7 +113,8 @@ window.addEventListener(`load`, e => {
     
     
     document.body.classList.remove(`hiddenPreloader`)
-    document.querySelector(`.contentPreloader `).style.display = `none`
+    document.querySelector(`.contentPreloader `).classList.add(`scale0preloader`)
+    document.querySelector(`.contentMenuDesaparecerMedia `).style.visibility = `visible`
     
 })
 // ==============================================================================
@@ -131,7 +135,8 @@ const validadion = (ipad) => {
         })
 
         window.addEventListener(`scroll`, (e) => {
-            if (scrollY + 350 > alturaAnimate) {
+            // console.log()
+            if (scrollY + 400 > alturaAnimate) {
                 titleMenu.style.animationName = `desaserMenu`
                 bcgtitleMenu.classList.add(`bgc0`)
                 setTimeout(() => {
@@ -196,9 +201,7 @@ const validadion = (ipad) => {
                 case ocultarMenu:
                     MostrarRegrezar(`primeraVistaMenuComida__img`, `contentTituloMenu`, `botonVerMenu`, `segundaVistaMenuComida`, `primeraVistaMenuComida`, `posicionOriginalDerecha`, `posicionOriginalIzquierda`, `transladarMedioAparecer`, `desaparecerMenu`)
                     break;
-                // case ocultarMenu:
-                //     MostrarRegrezar(`primeraVistaMenuComida__img`, `contentTituloMenu`, `botonVerMenu`, `segundaVistaMenuComida`, `primeraVistaMenuComida`, `posicionOriginalDerecha`, `posicionOriginalIzquierda`, `transladarMedioAparecer`, `desaparecerMenu`)
-                //     break;
+
             }
 
         })

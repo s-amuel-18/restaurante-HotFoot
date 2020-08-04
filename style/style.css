@@ -1799,6 +1799,12 @@ text-align: center;
     background-color: #000;
     perspective: 120px;
 }
+
+.scale0preloader {
+    display: none;
+}
+
+
 .contentPreloader img{
     width: 70px;
     animation: preloader 1.4s infinite ease-out;
