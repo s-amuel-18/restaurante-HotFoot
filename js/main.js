@@ -130,8 +130,22 @@ const validadion = (ipad) => {
         Layer_1.addEventListener(`click`, () => {
             menuTrasladacion.classList.add(`activo`)
         })
-        closedx.addEventListener(`click`, e => {
-            menuTrasladacion.classList.remove(`activo`)
+        menuTrasladacion.addEventListener(`click`, e => {
+            console.log(e.target)
+            document.querySelectorAll(`.desplazarMenuAlClick`).forEach(link => {
+                switch (e.target) {
+                    case link:
+                        menuTrasladacion.classList.remove(`activo`)
+                        break;
+                    case closedx2 :
+                        menuTrasladacion.classList.remove(`activo`)
+                        break;
+                    case closedx :
+                        menuTrasladacion.classList.remove(`activo`)
+                        break;
+                    
+                }
+            })
         })
 
         window.addEventListener(`scroll`, (e) => {
