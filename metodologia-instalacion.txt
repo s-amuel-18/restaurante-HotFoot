@@ -1,0 +1,12 @@
+npm init: para inicializar la instalacion
+npm install postcss-cli --save: instalacion de dependencias
+npx postcss (archivo css para compilar) -o (archivo css compilado) -w -u
+
+
+                    ==========PLUGINS========
+npm install --save autoprefixer: plugin para colocar auto prefijos
+------------------- para usarlo usamos el comando
+npx postcss (archivo original) -o (archivo a compilar) -w -u autoprefixer
+
+
+

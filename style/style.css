@@ -418,7 +418,7 @@
     animation-fill-mode: forwards;
 }
 
-.imgPrincipalANIMATION {
+.imgPrincipalANIMATION { 
     animation-name: cambio;
 }
 
@@ -519,6 +519,7 @@
 }
 
 .segundaVistaMenuComida {
+    /* sds */
     display: flex;
     flex-wrap: wrap;
     animation-timing-function: ease-in;
